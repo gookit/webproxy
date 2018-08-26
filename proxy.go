@@ -38,14 +38,14 @@ package httpProxy
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"math/rand"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"math/rand"
-	"strings"
 	"regexp"
-	"log"
-	"io"
+	"strings"
 )
 
 // the Proxy ctx data type name
@@ -107,7 +107,7 @@ type Options struct {
 	//	LogOutput = os.Stdout
 	//	LogOutput = new(bytes.Buffer)
 	//	LogOutput, _ = os.OpenFile("proxy.log", os.O_RDWR|os.O_CREATE, os.ModePerm)
-	LogOutput     io.Writer
+	LogOutput io.Writer
 	//
 	Events map[string]func(args ...interface{}) error
 	// Routes table, if match success, will override Target.
