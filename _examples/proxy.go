@@ -1,10 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gookit/httpProxy"
 	"log"
 	"net/http"
-	"fmt"
 )
 
 var (

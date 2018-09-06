@@ -8,3 +8,7 @@ http proxy learning project.
 - https://github.com/chimurai/http-proxy-middleware
 - package `golang.org/x/net/proxy`
 - https://github.com/ilanyu/ReverseProxy
+
+## License
+
+**MIT**
