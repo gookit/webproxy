@@ -1,4 +1,4 @@
-// Package httpProxy is a simple http proxy tool.
+// Package webproxy is a simple http proxy tool.
 //
 // Refer:
 // 	https://github.com/nodejitsu/node-http-proxy
@@ -34,7 +34,7 @@
 // 		[]string{"/api", "/v1/api", "/some/**/special-api"}
 // 	custom validate func:
 // 		FilterFunc - must be type of FilterFunc. return True, proxy current request
-package httpProxy
+package webproxy
 
 import (
 	"fmt"
@@ -104,9 +104,9 @@ type Options struct {
 	LogLevel    int
 	// LogOutput
 	// Example:
-	//	LogOutput = os.Stdout
-	//	LogOutput = new(bytes.Buffer)
-	//	LogOutput, _ = os.OpenFile("proxy.log", os.O_RDWR|os.O_CREATE, os.ModePerm)
+	// 	LogOutput = os.Stdout
+	// 	LogOutput = new(bytes.Buffer)
+	// 	LogOutput, _ = os.OpenFile("proxy.log", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	LogOutput io.Writer
 	//
 	Events map[string]func(args ...interface{}) error
@@ -129,11 +129,10 @@ const (
 // FilterFunc custom filter to check if it should be proxy or not
 type FilterFunc func(path string, r *http.Request) bool
 
-// proxyRes -> ModifyResponse
-var proxyEvents = []string{"error", "proxyReq", "proxyReqWs", "proxyRes", "open", "close"}
-
 var (
 	matchAll = map[string]uint8{"": 1, "/": 1, "**": 1}
+	// proxyRes -> ModifyResponse
+	proxyEvents = []string{"error", "proxyReq", "proxyReqWs", "proxyRes", "open", "close"}
 )
 
 // New a proxy instance.

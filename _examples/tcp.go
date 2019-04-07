@@ -30,7 +30,7 @@ func (ps *ProxyServer) askPort() int {
 	port := 0
 
 	fmt.Print("Port : ")
-	fmt.Scanf("%d", &port)
+	_, _ = fmt.Scanf("%d", &port)
 
 	return port
 }
@@ -82,7 +82,7 @@ func (ps *ProxyServer) connectHost(client net.Conn) {
 	if port == -1 {
 		fmt.Println(client.LocalAddr(), client.RemoteAddr(), )
 		// client.Write([]byte("parse header error"))
-		client.Close()
+		_= client.Close()
 		return
 	}
 

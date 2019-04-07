@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/gookit/httpProxy"
 	"log"
 	"net/http"
+
+	"github.com/gookit/webproxy"
 )
 
 var (
@@ -17,17 +18,17 @@ func main() {
 	mux := http.DefaultServeMux
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello"))
+		_,_ = w.Write([]byte("hello"))
 	})
 
-	all1 := httpProxy.Target(url1, httpProxy.Options{Debug: true})
+	all1 := webproxy.Target(url1, webproxy.Options{Debug: true})
 	mux.HandleFunc("/pxy1", all1.HandlerFunc())
 
-	all2 := httpProxy.Target(url2, httpProxy.Options{Debug: true})
+	all2 := webproxy.Target(url2, webproxy.Options{Debug: true})
 	mux.HandleFunc("/pxy2", all2.HandlerFunc())
 
 	// as a middleware
-	proxy := httpProxy.New("/api", httpProxy.Options{
+	proxy := webproxy.New("/api", webproxy.Options{
 		Debug:  true,
 		Target: "http://yzone.net",
 	})
